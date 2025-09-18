@@ -5,6 +5,7 @@ Colección de utilidades Python reutilizables.
 ## Paquetes implementados
 
 - `logger`: utilidades para logging y mensajes de consola coloreados.
+- `data_generator`: utilidad para generar archivos de datos aleatorios.
 
 ## API de `logger`
 
@@ -21,6 +22,25 @@ Imprime mensajes de log en consola con colores según el nivel de severidad y lo
 - `message` (str): mensaje a imprimir.
 - `level` (int): nivel de severidad (`logging.DEBUG`, `logging.INFO`, `logging.WARNING`, `logging.ERROR`). Por defecto `logging.INFO`.
 - `eol` (bool): si es True, añade una línea extra tras el mensaje. Por defecto False.
+
+## API de `data_generator`
+
+### DataGenerator(file="data")
+Objeto generador de base de datos de estudiantes aleatoria. Maneja archivos de salida en formato CSV, JSON & YAML.
+
+> Nota: Al crear una nueva instancia, se invocan todos los métodos de la API. 
+
+**Parámetros:**
+- `data` (str): nombre de los archivos de salida. Por defecto "data".
+  
+### data_generator.set_logging(log_file="data_generator.log")
+Configura el sistema de logging global para mostrar mensajes de nivel INFO o superior y suprime la verbosidad de librerías externas (matplotlib, PIL, tensorflow, torch, sklearn). Guarda los logs en el archivo especificado.
+
+**Parámetros:**
+- `log_file` (str): nombre del archivo de log. Por defecto "data_generator.log".
+  
+### data_generator.generate_data()
+Genera los archivos de salida en formato CSV, JSON & YAML con la información generada aleatoriamente.
 
 ## Uso como submódulo
 
@@ -47,4 +67,6 @@ Actualizado: septiembre 2025
 
 ## Change Log
 
+- 2025-09-18: Inclusión del paquete `data_generator` para generación de archivos de datos (CSV, JSON & YAML).
 - 2025-09-13: Primera versión pública. Incluye el paquete `logger` con funciones de logging y mensajes de consola coloreados.
+

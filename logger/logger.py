@@ -73,25 +73,42 @@ def plog(message, level=logging.INFO, eol=False):
     # Deploy colored message to console
     print(f"{color}{message}{reset}" if not eol else f"{color}{message}{reset}\n")
     
-def clog(name):
+def clog(obj):
     """
-    Display the public structure of a class or instance, excluding special methods and attributes.
+    Display public structure of a class or instance, separating attributes and methods.
 
     Args:
-        name (type or object): The class or instance to inspect. Typically a class like `Perceptron`.
+        obj (type or object): The class or instance to inspect.
 
     Behavior:
         - Filters out all members starting with '__'.
-        - Logs each public attribute or method with indentation and tree-style formatting.
-        - If no public members are found, logs an error message.
+        - Separates attributes (non-callable) from methods (callable).
+        - Logs each with indentation and tree-style formatting.
+
     """
-    public_defined = [name for name in dir(name) if not name.startswith('__')]
-    plog(f"Estructura pública de la clase {str(name)}:", level=logging.ERROR if not public_defined else logging.DEBUG)
-    if public_defined:
-        for i, name in enumerate(public_defined):
-            if i == len(public_defined) - 1:
-                plog(f"    └─ {name}", level=logging.DEBUG, eol=True)
+    members = [name for name in dir(obj) if not name.startswith('__')]
+    attributes = [name for name in members if not callable(getattr(obj, name))]
+    methods = [name for name in members if callable(getattr(obj, name))]
+
+    plog(f"Estructura pública de {obj.__name__ if hasattr(obj, '__name__') else type(obj).__name__}:", level=logging.DEBUG)
+
+    if attributes:
+        plog("  Atributos:", level=logging.DEBUG)
+        for i, name in enumerate(attributes):
+            if i == len(attributes) - 1:
+                prefix = "    └─"  
+            else: 
+                prefix = "    ├─"
+            plog(f"{prefix} {name}", level=logging.DEBUG)
+
+    if methods:
+        plog("  Métodos:", level=logging.DEBUG)
+        for i, name in enumerate(methods):
+            if i == len(methods) - 1:
+                prefix = "    └─" 
             else:
-                plog(f"    ├─ {name}", level=logging.DEBUG)
-    else:
-        plog(f"{public_defined}", level=logging.ERROR, eol=True)
+                prefix = "    ├─"
+            plog(f"{prefix} {name}", level=logging.DEBUG)
+
+    if not attributes and not methods:
+        plog("  (Sin miembros públicos)", level=logging.ERROR, eol=True)

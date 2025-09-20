@@ -16,7 +16,8 @@ def set_logging(log_file="exercise.log"):
 
     This function configures the logging module to show messages of level INFO or higher.
     It also sets the logging level of specific external libraries to WARNING to reduce verbosity.
-    """
+    """    
+
     # Ensure the log directory exists
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
@@ -26,7 +27,7 @@ def set_logging(log_file="exercise.log"):
         logger.handlers.clear()
 
     # Create a file handler and set its level and formatter
-    file_handler = logging.FileHandler(log_file, mode='w')
+    file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
     file_handler.setLevel(logging.INFO)
     formatter = logging.Formatter('%(levelname)s - %(message)s')
     file_handler.setFormatter(formatter)

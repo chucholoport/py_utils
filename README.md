@@ -23,6 +23,18 @@ Imprime mensajes de log en consola con colores según el nivel de severidad y lo
 - `level` (int): nivel de severidad (`logging.DEBUG`, `logging.INFO`, `logging.WARNING`, `logging.ERROR`). Por defecto `logging.INFO`.
 - `eol` (bool): si es True, añade una línea extra tras el mensaje. Por defecto False.
 
+### logger.clog(name)
+Muestra en consola la estructura pública de una clase o instancia, excluyendo atributos y métodos especiales (__dunder__). Ideal para inspección didáctica y depuración estructural.
+
+**Parámetros:**
+- name (type or object): clase o instancia a inspeccionar. Por ejemplo, Perceptron.
+
+**Comportamiento:**
+- Filtra todos los miembros cuyo nombre comienza con __.
+- Imprime cada atributo o método público con indentación y formato tipo árbol (├─, └─).
+- Si no se encuentran miembros públicos, muestra un mensaje de error.
+
+
 ## API de `data_generator`
 
 ### DataGenerator(file="data")
@@ -67,6 +79,7 @@ Actualizado: septiembre 2025
 
 ## Change Log
 
+- 2025-09-20: Actualización del paquete `logger` con funcion clog para desplegar estructuras de clases.
 - 2025-09-18: Inclusión del paquete `data_generator` para generación de archivos de datos (CSV, JSON & YAML).
 - 2025-09-13: Primera versión pública. Incluye el paquete `logger` con funciones de logging y mensajes de consola coloreados.
 

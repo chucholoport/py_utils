@@ -72,3 +72,26 @@ def plog(message, level=logging.INFO, eol=False):
         
     # Deploy colored message to console
     print(f"{color}{message}{reset}" if not eol else f"{color}{message}{reset}\n")
+    
+def clog(name):
+    """
+    Display the public structure of a class or instance, excluding special methods and attributes.
+
+    Args:
+        name (type or object): The class or instance to inspect. Typically a class like `Perceptron`.
+
+    Behavior:
+        - Filters out all members starting with '__'.
+        - Logs each public attribute or method with indentation and tree-style formatting.
+        - If no public members are found, logs an error message.
+    """
+    public_defined = [name for name in dir(name) if not name.startswith('__')]
+    plog(f"Estructura pública de la clase {str(name)}:", level=logging.ERROR if not public_defined else logging.DEBUG)
+    if public_defined:
+        for i, name in enumerate(public_defined):
+            if i == len(public_defined) - 1:
+                plog(f"    └─ {name}", level=logging.DEBUG, eol=True)
+            else:
+                plog(f"    ├─ {name}", level=logging.DEBUG)
+    else:
+        plog(f"{public_defined}", level=logging.ERROR, eol=True)

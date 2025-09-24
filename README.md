@@ -87,7 +87,7 @@ Actualizado: septiembre 2025
 
 ## Change Log
 
-- 2025-09-20: Actualización del paquete `logger` con funcion mlog para labels de mensajes de consola coloreados.
+- 2025-09-24: Actualización del paquete `logger` con funcion mlog para labels de mensajes de consola coloreados.
 - 2025-09-20: Actualización del paquete `logger` con funcion clog para desplegar estructuras de clases.
 - 2025-09-18: Inclusión del paquete `data_generator` para generación de archivos de datos (CSV, JSON & YAML).
 - 2025-09-13: Primera versión pública. Incluye el paquete `logger` con funciones de logging y mensajes de consola coloreados.

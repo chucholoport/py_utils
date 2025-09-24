@@ -113,3 +113,37 @@ def clog(obj):
 
     if not attributes and not methods:
         plog("  (Sin miembros públicos)", level=logging.ERROR, eol=True)
+
+def mlog(message, log, level=logging.INFO, eol: bool=False):
+    """
+    Print log labeled messages with color coding based on severity level.
+    
+    Args:
+        message (str): The log message label to be printed.
+        log (str): The log message content to be registered.
+        level (int):  The severity level of the log message. Defaults to logging.INFO.
+                        Possible values: logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR.
+        eol (bool):   If True, adds an extra newline after the message for better readability. Defaults to False.
+    """
+    # ANSI escape codes for colors
+    color = ""
+    reset = "\033[0m"
+    
+    # Log the message using the logging module and set color based on level
+    if level == logging.DEBUG:
+        logging.info(log if not eol else log + "\n")
+        color = "\033[36m"   # Cyan
+    elif level == logging.INFO:
+        logging.info(log if not eol else log + "\n")
+        color = "\033[32m"   # Green
+    elif level == logging.WARNING:
+        logging.warning(log if not eol else log + "\n")
+        color = "\033[33m"   # Yellow
+    elif level == logging.ERROR:
+        logging.error(log if not eol else log + "\n")
+        color = "\033[31m"   # Red
+    else:
+        color = ""
+        
+    # Deploy colored message to console
+    print(f"{color}{message}{reset}" if not eol else f"{color}{message}{reset}\n")

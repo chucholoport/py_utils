@@ -34,6 +34,14 @@ Muestra en consola la estructura pública de una clase o instancia, excluyendo a
 - Imprime cada atributo o método público con indentación y formato tipo árbol (├─, └─).
 - Si no se encuentran miembros públicos, muestra un mensaje de error.
 
+### logger.mlog(message, log, level=logging.INFO, eol=False)
+Imprime labels de log en consola con colores según el nivel de severidad y los registra usando el sistema de logging.
+
+**Parámetros:**
+- `message` (str): label de mensaje a imprimir.
+- `log` (str): label de mensaje a registrar en log.
+- `level` (int): nivel de severidad (`logging.DEBUG`, `logging.INFO`, `logging.WARNING`, `logging.ERROR`). Por defecto `logging.INFO`.
+- `eol` (bool): si es True, añade una línea extra tras el mensaje. Por defecto False.
 
 ## API de `data_generator`
 
@@ -79,6 +87,7 @@ Actualizado: septiembre 2025
 
 ## Change Log
 
+- 2025-09-20: Actualización del paquete `logger` con funcion mlog para labels de mensajes de consola coloreados.
 - 2025-09-20: Actualización del paquete `logger` con funcion clog para desplegar estructuras de clases.
 - 2025-09-18: Inclusión del paquete `data_generator` para generación de archivos de datos (CSV, JSON & YAML).
 - 2025-09-13: Primera versión pública. Incluye el paquete `logger` con funciones de logging y mensajes de consola coloreados.
